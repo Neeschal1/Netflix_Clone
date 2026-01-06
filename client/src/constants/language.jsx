@@ -5,7 +5,8 @@ const languages = {
     description: "Unlimited movies, TV shows, and more (starts at USD 2.99. Cancel anytime.)",
     suggestions: "Ready to watch? Create your account or sign in to continue.",
     login: "Login",
-    signup: "Sign Up"
+    signup: "Sign Up",
+    otp: "Please enter the OTP sent in your email"
   },
   np: {
     welcome: "नेटफ्लिक्स क्लोनमा स्वागत छ",

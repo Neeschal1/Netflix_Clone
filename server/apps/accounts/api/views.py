@@ -6,23 +6,6 @@ from rest_framework.views import APIView
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 from rest_framework import status
-
-class UserSerializersView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializers
-    permission_classes = [AllowAny] 
-    authentication_classes = []  # Disable session authentication → no CSRF required
-
-    def perform_create(self, serializer):
-        validated_data = serializer.validated_data
-        user = User.objects.create_user(
-            username=validated_data.get('username'),
-            email=validated_data.get('email'),
-            first_name=validated_data.get('first_name'),
-            last_name=validated_data.get('last_name'),
-            password=validated_data.get('password')
-        )
-        return user
     
 class UserSignupSerializersView(APIView):
     def post(self, request):
@@ -50,4 +33,4 @@ class UserSignupSerializersView(APIView):
             password = HashedPassword
         )
         
-        return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        return Response({"message": "User created successfully", "data" : user}, status=status.HTTP_201_CREATED)
