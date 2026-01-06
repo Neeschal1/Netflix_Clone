@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import banner from "../assets/banner.png";
 import logo from "../assets/logo.png";
 
+
 const Welcome = () => {
   const [language, setLanguage] = useState("en");
   const navigate = useNavigate();
@@ -30,10 +31,6 @@ const Welcome = () => {
       }}
       className="w-full h-screen relative flex flex-col items-center justify-center text-white"
     >
-      {/* Full-screen semi-transparent black overlay */}
-      <div className="absolute inset-0"></div>
-
-      {/* Logo and language selector stretched across the top */}
       <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4 px-20 z-10">
         <img src={logo} alt="Logo" className="h-24 w-auto" />
         <div className="flex items-center gap-4">
