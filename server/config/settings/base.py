@@ -1,6 +1,7 @@
-from config import Config
+from env_config import Config
+from pathlib import Path
 
-SECRET_KEY = Config.SECRET_KEY
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -9,6 +10,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'server.apps.accounts'
 ]
 
 MIDDLEWARE = [
@@ -21,7 +24,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'server.urls'
+ROOT_URLCONF = 'server.config.urls'
 
 TEMPLATES = [
     {
@@ -37,9 +40,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'server.wsgi.application'
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
