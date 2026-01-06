@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 DEBUG = True
 SECRET_KEY = Config.SECRET_KEY
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 WSGI_APPLICATION = 'server.config.wsgi.application'
 

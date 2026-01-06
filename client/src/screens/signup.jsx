@@ -2,21 +2,46 @@ import React, { useState } from "react";
 import banner from "../assets/banner.png";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [Firstname, setFirstName] = useState("");
+  const [Lastname, setLastName] = useState("");
+  const [Username, setUsername] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+
+  const handlesignup = async (e) => {
+    e.preventDefault();
+    const data = {
+      first_name: Firstname,
+      last_name: Lastname,
+      username: Username,
+      email: Email,
+      password: Password,
+    };
+
+    try {
+      const url = await axios.post(
+        "http://127.0.0.1:8000/accounts/signup/",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(url.data);
+    } catch (err) {
+      console.log("Django Error: ", err);
+    }
+  };
 
   const handleAboutUs = () => {
     navigate("/aboutus");
-  };
-
-  // State to toggle password visibility
-  const [showPassword, setShowPassword] = useState(false);
-
-  // Handle form submission
-  const handleSignup = (e) => {
-    e.preventDefault();
-    console.log("Signup clicked");
   };
 
   return (
@@ -42,20 +67,27 @@ const Signup = () => {
 
       {/* Form Container */}
       <form
-        onSubmit={handleSignup}
+        onSubmit={handlesignup}
         className="p-5 flex w-4/12 items-center justify-center bg-black/50 flex-col gap-5 rounded"
       >
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">
-          Signup
-        </h1>
+        <div className="flex w-full flex-col items-start ">
+          <h1 className="text-4xl font-bold mb-4 text-center">
+            Signup
+          </h1>
+          <p className="mt-[-8px]">Create your account or sign in to continue.</p>
+        </div>
 
         {/* First Name */}
         <div className="w-full">
           <p>First Name:</p>
           <input
+            value={Firstname}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
             className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
             type="text"
-            placeholder="eg: Neeschal"
+            placeholder="Enter your first name"
             required
           />
         </div>
@@ -64,9 +96,27 @@ const Signup = () => {
         <div className="w-full">
           <p>Last Name:</p>
           <input
+            value={Lastname}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
             className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
             type="text"
-            placeholder="eg: Pokharel"
+            placeholder="Enter your last name"
+            required
+          />
+        </div>
+
+        <div className="w-full">
+          <p>Username:</p>
+          <input
+            value={Username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
+            type="text"
+            placeholder="Select a unique username"
             required
           />
         </div>
@@ -75,9 +125,13 @@ const Signup = () => {
         <div className="w-full">
           <p>Email:</p>
           <input
+            value={Email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
             type="email"
-            placeholder="eg: neeschalpokharel@gmail.com"
+            placeholder="Enter your email"
             required
           />
         </div>
@@ -87,6 +141,10 @@ const Signup = () => {
         <div className="w-full relative">
           <p>Password:</p>
           <input
+            value={Password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2 pr-12"
             type={showPassword ? "text" : "password"}
             placeholder="Enter your Password"
