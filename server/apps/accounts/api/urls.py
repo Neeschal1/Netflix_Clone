@@ -7,5 +7,6 @@ def home(request):
 
 urlpatterns = [
     path('', home, name='home'),
-    path('signup/', views.UserSignupSerializersView.as_view(), name='UserSignupSerializersView')
+    path('signup/', views.UserSignupSerializersView.as_view(), name='UserSignupSerializersView'),
+    path('signup/otp/', views.UserOTPSerializersView.as_view(), name='UserOTPSerializersView')
 ]
