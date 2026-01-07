@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
-// import handlesignup from "../api/handlesignup";
+import handlelogin from "../api/accounts/handlelogin";
 import languages from "../constants/language";
 import Header from "../constants/header";
 
@@ -15,10 +15,11 @@ const Login = ({ language }) => {
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    handlesignup(e, Firstname, Lastname, Username, Email, Password, navigate, setLoading);
+    handlelogin(e, Email, Password, navigate, setLoading, setError);
   };
 
   return (
@@ -84,14 +85,17 @@ const Login = ({ language }) => {
           </button>
         </div>
 
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <button
           type="submit"
           disabled={loading}
           className={`w-full py-3 rounded text-white font-semibold mt-4 transition 
     ${loading ? "hover:bg-red-800 cursor-not-allowed" : "bg-red-600 hover:bg-red-700"}`}
         >
-          {loading ? "Signing in..." : "Sign Up"}
+          {loading ? "Logging in..." : "Log In"}
         </button>
+
       </form>
     </div>
   );

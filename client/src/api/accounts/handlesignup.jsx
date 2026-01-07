@@ -28,7 +28,7 @@ const handlesignup = async (e,
       },
     });
     console.log("Signup Success: ", url.data);
-    navigate("/signup/otp");
+    navigate("/login");
   } catch (err) {
     console.log("Django Error: ", err);
   } finally {

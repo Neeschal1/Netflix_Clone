@@ -11,6 +11,7 @@ import { useState } from "react";
 import OTP from "./screens/otpverification";
 import Aboutus from "./screens/aboutus";
 import Login from "./screens/login";
+import Home from "./screens/home";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/signup" element={<Signup language={language} />} />
         <Route path="/signup/otp" element={<OTP language={language} />} />
         <Route path="/about" element={<Aboutus language={language} />} />
+        <Route path="/login/home" element={<Home language={language} />} />
       </Routes>
     </Router>
   );
