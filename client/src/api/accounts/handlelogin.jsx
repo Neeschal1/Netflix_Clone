@@ -1,5 +1,6 @@
 import axios from "axios";
 import url from "../../constants/url";
+import homecontents from "../contents/homecontents";
 
 const handlelogin = async (e, Email, Password, navigate, setLoading, setError) => {
   e.preventDefault();
@@ -15,7 +16,13 @@ const handlelogin = async (e, Email, Password, navigate, setLoading, setError) =
       },
       withCredentials: true, 
     });
-    console.log('Django message : ', response)
+    const accessToken = response.data.Tokens.access_token
+
+    localStorage.setItem("accessToken", accessToken);
+
+    const contentsdata = await homecontents(accessToken)
+    
+    console.log("Homecontents: ", contentsdata)
     navigate('/login/home')
   } catch (err) {
     let errorMessage = "Something went wrong!";

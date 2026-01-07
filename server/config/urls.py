@@ -17,6 +17,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home, name="home"),
     path("accounts/", include("server.apps.accounts.api.urls")),
+    path("contents/", include("server.apps.contents.api.urls")),
     path("token/access/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

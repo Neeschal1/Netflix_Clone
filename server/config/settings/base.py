@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'server.apps.accounts'
+    'server.apps.accounts',
+    'server.apps.contents',
 ]
 
 
@@ -87,6 +88,12 @@ CORS_ALLOW_METHODS = (
     "POST",
     "PUT",
 )
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = 'application/json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
