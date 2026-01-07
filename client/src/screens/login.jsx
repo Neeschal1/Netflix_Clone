@@ -4,26 +4,21 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
-import handlesignup from "../api/accounts/handlesignup";
+// import handlesignup from "../api/handlesignup";
 import languages from "../constants/language";
 import Header from "../constants/header";
-import otpverification from "../api/accounts/handleotp";
 
-const Signup = ({ language }) => {
+const Login = ({ language }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
 
-  const [Firstname, setFirstName] = useState("");
-  const [Lastname, setLastName] = useState("");
-  const [Username, setUsername] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
   const handlesubmit = (e) => {
     e.preventDefault();
     handlesignup(e, Firstname, Lastname, Username, Email, Password, navigate, setLoading);
-    getusername
   };
 
   return (
@@ -43,53 +38,9 @@ const Signup = ({ language }) => {
       >
         <div className="flex w-full flex-col items-start ">
           <h1 className="text-4xl font-bold mb-4 text-center">
-            {languages[language].signup}
+            {languages[language].login}
           </h1>
-          <p className="mt-[-8px]">{languages[language].suggestions}</p>
-        </div>
-
-        {/* First Name */}
-        <div className="w-full">
-          <p>First Name:</p>
-          <input
-            value={Firstname}
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-            className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
-            type="text"
-            placeholder="Enter your first name"
-            required
-          />
-        </div>
-
-        {/* Last Name */}
-        <div className="w-full">
-          <p>Last Name:</p>
-          <input
-            value={Lastname}
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-            className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
-            type="text"
-            placeholder="Enter your last name"
-            required
-          />
-        </div>
-
-        <div className="w-full">
-          <p>Username:</p>
-          <input
-            value={Username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-            className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
-            type="text"
-            placeholder="Select a unique username"
-            required
-          />
+          <p className="mt-[-8px]">{languages[language].description}</p>
         </div>
 
         {/* Email */}
@@ -146,4 +97,4 @@ const Signup = ({ language }) => {
   );
 };
 
-export default Signup;
+export default Login;

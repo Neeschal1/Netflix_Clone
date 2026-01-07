@@ -9,6 +9,8 @@ import Welcome from "./screens/welcome";
 import Signup from "./screens/signup";
 import { useState } from "react";
 import OTP from "./screens/otpverification";
+import Aboutus from "./screens/aboutus";
+import Login from "./screens/login";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -17,8 +19,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path="/welcome" element={<Welcome language={language} setLanguage={setLanguage} />}/>
+        <Route path="/login" element={<Login language={language} />} />
         <Route path="/signup" element={<Signup language={language} />} />
         <Route path="/signup/otp" element={<OTP language={language} />} />
+        <Route path="/about" element={<Aboutus language={language} />} />
       </Routes>
     </Router>
   );

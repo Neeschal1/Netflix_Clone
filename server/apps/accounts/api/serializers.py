@@ -26,3 +26,7 @@ class UserOTPSerializers(serializers.ModelSerializer):
             'Userotp' : {'required' : True},
         }
         
+
+class UserLoginSerializers(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()

@@ -3,14 +3,26 @@ import banner from "../assets/banner.png";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import languages from "../constants/language";
+import otpverification from "../api/accounts/handleotp";
 
 const OTP = ({ language }) => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+
+  const getusername = () => {
+
+  }
+
+  const handleotp = (e) => {
+    e.preventDefault();
+    otpverification(e, otp)
+  };
+
   const handleAboutUs = () => {
     navigate("/aboutus");
   };
+
   return (
     <div
       style={{
@@ -33,7 +45,7 @@ const OTP = ({ language }) => {
       </div>
 
       <form
-        // onSubmit={handlesubmit}
+        onSubmit={handleotp}
         className="p-5 flex w-4/12 items-center justify-center bg-black/50 flex-col gap-5 rounded"
       >
         <div className="flex w-full flex-col items-start ">

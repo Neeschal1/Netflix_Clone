@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import response from "../constants/url";
+import response from "../../constants/url";
 import axios from "axios";
 
 const handlesignup = async (e,

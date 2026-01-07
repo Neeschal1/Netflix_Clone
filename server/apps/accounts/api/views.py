@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
-from .serializers import UserSerializers, UserOTPSerializers
+from .serializers import UserSerializers, UserOTPSerializers, UserLoginSerializers
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from ..services.otp import getotp
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -75,3 +75,22 @@ class UserOTPSerializersView(APIView):
         otpmodel = UserOTPSerializers(userotp)
         
         return otpmodel
+
+
+class UserLoginSerializersView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        serializer = UserLoginSerializers(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        Email = serializer.validated_data['email']
+        Password = serializer.validated_data['password']
+        
+        try:
+            user = User.objects.get(email = Email)
+        except User.DoesNotExist:
+            raise ValidationError("User Doesnot exists. Please signup an account first. Thank you!")
+        
+        if not check_password(Password, user.password):
+            raise ValidationError("Invalid Credentials!")
+        return Response("Logged in successfully!", status=status.HTTP_200_OK)

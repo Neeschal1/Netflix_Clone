@@ -10,7 +10,7 @@ const Welcome = ({language, setLanguage}) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/home");
+    navigate("/login");
   };
 
   const handleSignup = () => {
