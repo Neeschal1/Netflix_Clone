@@ -7,3 +7,6 @@ class Config:
     
     EMAIL = os.getenv('EMAIL')
     PASSWORD = os.getenv('PASSWORD')
+    
+    MAILTRAP_API_KEY = os.getenv('MAILTRAP_API_KEY')
+    
