@@ -6,7 +6,7 @@ import languages from "./language";
 const Header = ({ language }) => {
   const navigate = useNavigate();
   const handleAboutUs = () => {
-    navigate("/aboutus");
+    navigate("/about");
   };
   return (
     <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4 px-20 z-10">

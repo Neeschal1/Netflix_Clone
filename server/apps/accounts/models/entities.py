@@ -1,9 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .choices import USER_DESIRED_CONTENT_CHOICES
 
-class OTPmodel(models.Model):
-    Username = models.ForeignKey(User, on_delete=models.CASCADE)
-    Userotp = models.IntegerField()
+class Userchoice(models.Model):
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Users_choice = models.CharField(max_length=15, choices=USER_DESIRED_CONTENT_CHOICES)
     
     def __str__(self):
-        return self.Username.username
+        return self.User.first_name
+    
+class Profile(models.Model):
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Avatar = models.URLField()
+    Premium_Member = models.BooleanField(default=0)
+    
+    def __str__(self):
+        full_name = f'{self.User.first_name} {self.User.last_name}'
+        email = f'{self.User.email}'
+        return f'{full_name} | {email}'

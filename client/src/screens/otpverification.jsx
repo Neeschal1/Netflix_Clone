@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import banner from "../assets/banner.png";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import languages from "../constants/language";
 import otpverification from "../api/accounts/handleotp";
+import Header from "../constants/header";
 
 const OTP = ({ language }) => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(120);
 
-  const getusername = () => {
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
 
-  }
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const getusername = () => {};
 
   const handleotp = (e) => {
     e.preventDefault();
-    otpverification(e, otp)
+    otpverification(e, otp);
   };
 
   const handleAboutUs = () => {
@@ -34,7 +50,7 @@ const OTP = ({ language }) => {
       className="w-full h-screen relative flex flex-col items-center justify-center text-white"
     >
       {/* Header */}
-      <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4 px-20 z-10">
+      {/* <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4 px-20 z-10">
         <img src={logo} alt="Logo" className="h-24 w-auto" />
         <button
           onClick={handleAboutUs}
@@ -42,7 +58,8 @@ const OTP = ({ language }) => {
         >
           About Us
         </button>
-      </div>
+      </div> */}
+      <Header language={language} />
 
       <form
         onSubmit={handleotp}
@@ -51,6 +68,9 @@ const OTP = ({ language }) => {
         <div className="flex w-full flex-col items-start ">
           <h1 className="text-4xl font-bold mb-4 text-center">OTP</h1>
           <p className="mt-[-8px]">{languages[language].otp}</p>
+          <p className="mt-2 text-red-400 font-bold">
+            Time Left: {formatTime(timeLeft)}
+          </p>
         </div>
 
         <div className="w-full">

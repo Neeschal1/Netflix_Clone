@@ -8,7 +8,6 @@ from django.contrib.auth.hashers import make_password, check_password
 from ..services.otp import getotp
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
-from ..models.entities import OTPmodel
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 
@@ -36,6 +35,7 @@ class UserSignupSerializersView(APIView):
             username=Username,
             email=Email,
             password=HashedPassword,
+            is_active = False
         )
         # Serializing the user details
         responseserializers = UserSerializers(user)
