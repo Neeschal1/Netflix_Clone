@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from ..models.entities import Userchoice
 from django.contrib.auth.hashers import make_password
 
 # For Creating a user
@@ -39,3 +40,12 @@ class UserOTPSerializers(serializers.Serializer):
 class UserLoginSerializers(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+    
+class UserChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Userchoice
+        fields = '__all__'
+        extra_kwargs = {
+            'User' : {'write_only' : True},
+            'Users_choice' : {'required' : True},
+        }

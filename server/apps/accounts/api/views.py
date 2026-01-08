@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .serializers import UserSerializers, UserLoginSerializers, UserOTPSerializers, AllUserSerializer
+from .serializers import *
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from django.core.cache import cache
@@ -117,3 +117,20 @@ class AllUserSerializerView(generics.ListAPIView):
     permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = AllUserSerializer
+    
+    
+class UserChoiceSerializerView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        serializer = UserChoiceSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        Username = serializer.validated_data['User']
+        UsersChoice = serializer.validated_data['Users_choice']
+        try:
+            user = User.objects.get(username = Username)
+        except User.DoesNotExist:
+            raise ValidationError("User not found. Try again!!")
+        Userchoice.objects.create(
+            User = Username,
+            Users_choice = UsersChoice)
+        return Response(f"{user.first_name} choosed {UsersChoice}. From now onwards, you'll get to see your default contents based on your choice :)")
