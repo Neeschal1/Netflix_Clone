@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from .serializers import *
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
+from ..models.entities import *
 from django.core.cache import cache
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -41,7 +42,7 @@ class UserSignupSerializersView(APIView):
         # Serializing the user details
         responseserializers = UserSerializers(user)
         o_t_p = getotp(Firstname, Email)
-        cache.set(f'userotp for {Email}', o_t_p, timeout=300)
+        cache.set(f'userotp for {Email}', o_t_p, timeout=180)
         return Response(
             {"message": "User created successfully", "data": responseserializers.data},
             status=status.HTTP_201_CREATED,
@@ -127,10 +128,32 @@ class UserChoiceSerializerView(APIView):
         Username = serializer.validated_data['User']
         UsersChoice = serializer.validated_data['Users_choice']
         try:
-            user = User.objects.get(username = Username)
+            user = User.objects.get(id = Username)
         except User.DoesNotExist:
             raise ValidationError("User not found. Try again!!")
         Userchoice.objects.create(
             User = Username,
             Users_choice = UsersChoice)
         return Response(f"{user.first_name} choosed {UsersChoice}. From now onwards, you'll get to see your default contents based on your choice :)")
+
+
+class UsersProfileSerializerView(APIView):
+    permission_classes=[AllowAny]
+    def post(self, request):
+        serializer = UsersProfileSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        Username = serializer.validated_data['User']
+        User_Avatar = serializer.validated_data['Avatar']
+        Users_Membership = serializer.validated_data['Premium_Member']
+        try:
+            user = User.objects.get(username = Username)
+        except User.DoesNotExist:
+            raise ValidationError("User not found. Please try again later!")
+        Profile.objects.create(
+            User = Username,
+            Avatar = User_Avatar,
+            Premium_Member = Users_Membership
+        )
+        return Response(f"Successfully created a record: {user.first_name}'s has Membership: {Users_Membership}")
+        
+        

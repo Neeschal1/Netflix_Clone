@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from ..models.entities import Userchoice
+from ..models.entities import Userchoice, Profile
 from django.contrib.auth.hashers import make_password
 
 # For Creating a user
@@ -48,4 +48,14 @@ class UserChoiceSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'User' : {'write_only' : True},
             'Users_choice' : {'required' : True},
+        }
+        
+class UsersProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        extra_kwargs = {
+            'User' : {'required' : True},
+            'Avatar' : {'required' : True},
+            'Premium_Member' : {'required' : True},
         }
