@@ -56,6 +56,9 @@ class UsersProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {
             'User' : {'required' : True},
+            'Name' : {'required' : True},
             'Avatar' : {'required' : True},
-            'Premium_Member' : {'required' : True},
+            'Is_kid' : {'required' : True},
+            'Created_at' : {'read_only' : True},
         }
+  

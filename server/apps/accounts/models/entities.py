@@ -11,8 +11,10 @@ class Userchoice(models.Model):
     
 class Profile(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Name = models.CharField(max_length=30)
     Avatar = models.URLField()
-    Premium_Member = models.BooleanField(default=0)
+    Is_kid = models.BooleanField(default=0)
+    Created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         full_name = f'{self.User.first_name} {self.User.last_name}'

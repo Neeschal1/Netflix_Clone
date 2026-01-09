@@ -17,4 +17,4 @@ def otpverification(serializer):
         raise ValidationError("User does not found. So sorry :(")
     user.is_active = True
     user.save()
-    return user
+    return Response(f"{user.first_name}'s verfication status: {user.is_active}")

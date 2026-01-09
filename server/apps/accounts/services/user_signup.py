@@ -29,4 +29,7 @@ def signup_user(serializers):
     responseserializers = UserSerializers(user)
     o_t_p = getotp(Firstname, Email)
     cache.set(f'userotp for {Email}', o_t_p, timeout=300)
-    return responseserializers
+    return Response(
+            {"message": "User created successfully", "data": responseserializers.data},
+            status=status.HTTP_201_CREATED,
+        )

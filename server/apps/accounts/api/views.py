@@ -9,10 +9,7 @@ from ..services.user_login import login_an_account
 from ..services.users_choice import users_content_choice
 from ..services.users_profile import users_profile
 from rest_framework.views import APIView
-from django.contrib.auth.hashers import make_password, check_password
-from ..services.otp import getotp
 from rest_framework.response import Response
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework import status
 
@@ -22,11 +19,7 @@ class UserSignupSerializersView(APIView):
     def post(self, request):
         serializers = UserSerializers(data=request.data)
         serializers.is_valid(raise_exception=True)
-        responseserializers = signup_user(serializers)
-        return Response(
-            {"message": "User created successfully", "data": responseserializers.data},
-            status=status.HTTP_201_CREATED,
-        )
+        return signup_user(serializers)
         
 # Views for OTP Verification
 class UserOTPSerializersView(APIView):
@@ -34,9 +27,8 @@ class UserOTPSerializersView(APIView):
     def post(self, request):
         serializer = UserOTPSerializers(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = otpverification(serializer)
-        return Response(f"{user.first_name}'s verfication status: {user.is_active}")
-
+        return otpverification(serializer)
+    
 # Views for Logging in a user
 class UserLoginSerializersView(APIView):
     permission_classes = [AllowAny]
@@ -60,7 +52,6 @@ class UsersProfileSerializerView(APIView):
         serializer = UsersProfileSerializer(data = request.data)
         serializer.is_valid(raise_exception=True)
         return users_profile(serializer)
-        
         
 # Views for Admins only(Seeing all users)
 class AllUserSerializerView(generics.ListAPIView):
