@@ -1,6 +1,6 @@
 import random
 import mailtrap as mt
-from env_config import Config
+from server.env_config import Config
 from django.core.mail import send_mail
 
 def getotp(firstname, useremail):

@@ -1,6 +1,6 @@
 from .base import *
 from pathlib import Path
-from env_config import Config
+from server.env_config import Config
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 DEBUG = True

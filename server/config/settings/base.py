@@ -1,4 +1,4 @@
-from env_config import Config
+from server.env_config import Config
 from pathlib import Path
 from datetime import timedelta
 

@@ -1,4 +1,5 @@
-.env
+server/.env
+client/.env
 notes.txt
 requirements.txt
 venv
