@@ -33,7 +33,6 @@ const handlesignup = async (e,
         email : Email
       }
     });
-    
   } catch (err) {
     console.log("Django Error: ", err);
   } finally {

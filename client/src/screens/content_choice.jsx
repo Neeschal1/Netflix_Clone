@@ -2,17 +2,27 @@ import banner from "../assets/banner.png";
 import languages from "../constants/language";
 import Header from "../constants/header";
 import Contents from "../components/contents/contents";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Choices from "../api/contents/choices";
 import { useState } from "react";
 
 const Contentchoices = ({ language }) => {
   const navigate = useNavigate();
-  const [val, setVal] = useState('mov')
+  const [val, setVal] = useState("mov");
   const [loading, setLoading] = useState(false);
-  savedetails = (e) => {
+  const location = useLocation();
+
+  const userid = location.state?.id;
+
+  const on_clicked = (e) => {
+    // console.log(`Selected Id: ${userid},\nSelected Value: ${val}`)
+    e.preventDefault()
+    Choices(e, userid, val, setLoading, navigate);
+  }
+
+  const savedetails = (e) => {
     e.preventDefault();
-    Choices(e);
+    Choices(e, userid, val, setLoading, navigate);
   };
   return (
     <div
@@ -27,7 +37,7 @@ const Contentchoices = ({ language }) => {
       <Header language={language} />
 
       <form
-        onSubmit={savedetails}
+        // onSubmit={savedetails}
         className="p-5 flex w-4/12 items-center justify-center bg-black/50 flex-col gap-5 rounded"
       >
         <div className="flex w-full flex-col items-start ">
@@ -42,32 +52,20 @@ const Contentchoices = ({ language }) => {
         {/* Contents */}
         <div className="relative inline-block w-full">
           <select
-            // value={language}
-            // onChange={(e) => setLanguage(e.target.value)}
-            className="px-4 py-2 rounded border border-white bg-black bg-opacity-50 text-white focus:outline-none focus:border-red-600 cursor-pointer appearance-none w-full"
+            value={val}
+            onChange={(e) => setVal(e.target.value)}
+            className="px-2 py-2 rounded border border-white bg-black bg-opacity-50 text-white w-full "
           >
-            <option value={setVal('eng')} className="bg-white text-black">
-              MOVIES
-            </option>
-            <option value={setVal("ser")} className="bg-white text-black">
-              SERIES
-            </option>
-            <option value="doc" className="bg-white text-black">
-              DOCUMENTARY
-            </option>
-            <option value="ani" className="bg-white text-black">
-              ANIMATIONS
-            </option>
-            <option value="kid" className="bg-white text-black">
-              KIDS
-            </option>
-            <option value="spo" className="bg-white text-black">
-              SPORTS
-            </option>
+            <option value="MOVIES">Movies</option>
+            <option value="SERIES">Series</option>
+            <option value="DOCUMENTARY">Documentary</option>
+            <option value="ANIMATIONS">Animations</option>
+            <option value="KIDS">Kids</option>
+            <option value="SPORTS">Sports</option>
           </select>
 
           {/* Custom arrow */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+          {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
             <svg
               className="w-4 h-4"
               fill="none"
@@ -82,13 +80,12 @@ const Contentchoices = ({ language }) => {
                 d="M19 9l-7 7-7-7"
               />
             </svg>
-          </div>
+          </div> */}
         </div>
 
-
-
         <button
-          type="submit"
+          type="button"
+        onClick={on_clicked}
           disabled={loading}
           className={`w-full py-3 rounded text-white font-semibold mt-4 transition 
     ${

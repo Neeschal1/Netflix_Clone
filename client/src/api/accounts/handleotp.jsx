@@ -15,8 +15,13 @@ const otpverification = async (e, users_email, otp, navigate, setLoading) => {
         'Content-Type' : 'application/json'
       }
     });
-    console.log("User's data: ", response) 
-    navigate('/signup/otp/choices/')
+    const usersid = response.data.id
+    console.log("User's id: ", usersid) 
+    navigate('/signup/otp/choices/', {
+      state : {
+        id : usersid,
+      }
+    })
   } catch (err) {
     console.log("OTP error:", err.response?.data || err);
   } finally {

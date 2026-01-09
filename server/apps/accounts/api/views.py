@@ -27,7 +27,8 @@ class UserOTPSerializersView(APIView):
     def post(self, request):
         serializer = UserOTPSerializers(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return otpverification(serializer)
+        user = otpverification(serializer)
+        return Response({"Message": "OTP verified successfully", "Users verification Status" : user.is_active, "id" : user.id})
     
 # Views for Logging in a user
 class UserLoginSerializersView(APIView):
