@@ -62,16 +62,4 @@ def getotp(firstname, useremail):
         html_message=html_message,
     )
 
-    # mail = mt.Mail(
-    #     sender=mt.Address(email="nischalpok52@gmail.com", name="NETFLIX CLONE"),
-    #     to=[mt.Address(email=useremail)],
-    #     subject=mail_subject,
-    #     text=mail_message,
-    #     category="Integration Test",
-    # )
-
-    # # client = mt.MailtrapClient(token=Config.MAILTRAP_API_KEY)
-    # client = mt.MailtrapClient(token=Config.EMAIL_HOST_PASSWORD)
-    # client.send(mail)
-
     return otp_code
