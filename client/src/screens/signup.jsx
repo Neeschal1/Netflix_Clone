@@ -23,7 +23,6 @@ const Signup = ({ language }) => {
   const handlesubmit = (e) => {
     e.preventDefault();
     handlesignup(e, Firstname, Lastname, Username, Email, Password, navigate, setLoading);
-    getusername
   };
 
   return (

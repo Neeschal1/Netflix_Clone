@@ -7,8 +7,9 @@ from django.contrib.auth.hashers import make_password
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'is_active']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'password', 'is_active']
         extra_kwargs = {
+            'id' : {'read_only' : True},
             'first_name' : {'required' : True},
             'last_name' : {'required' : True},
             'username' : {'required' : True},
@@ -22,8 +23,9 @@ class UserSerializers(serializers.ModelSerializer):
 class AllUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'is_active']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'password', 'is_active']
         extra_kwargs = {
+            'id' : {'read_only' : True},
             'first_name' : {'read_only' : True},
             'last_name' : {'read_only' : True},
             'username' : {'read_only' : True},
