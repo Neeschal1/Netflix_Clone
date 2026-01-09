@@ -4,48 +4,50 @@ import Header from "../../constants/header";
 
 const Profilecomponents = ({ language }) => {
   return (
-    <div>
-      <Header language={language} />
-      <form
-        // onSubmit={}
-        className="p-5 flex w-4/12 items-center justify-center bg-black/50 flex-col gap-5 rounded"
-      >
-        {/* <div className="flex w-full flex-col items-start ">
-          <h1 className="text-4xl font-bold mb-4 text-center">OTP</h1>
-          <p className="mt-[-8px]">{languages[language].otp}: {users_email}</p>
-          <p className="mt-2 text-red-400 font-bold">
-            Time Left: {formatTime(timeLeft)}
-          </p>
-        </div>
+    <div className="p-6 flex flex-col items-center gap-4 bg-black/70 w-full max-w-md rounded">
+        <h1 className="text-2xl font-bold">Create Your Profile</h1>
 
-        <div className="w-full">
-          <p>OTP:</p>
-          <input
-            value={otp}
-            onChange={(e) => {
-              setOtp(e.target.value);
-            }}
-            className="w-full py-3 bg-white/30 rounded p-2 text-white mt-2"
-            type="text"
-            placeholder="Enter OTP"
-            required
+        <input
+          type="text"
+          placeholder="Profile Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-2 rounded text-black"
+        />
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="w-full text-white"
+        />
+
+        {avatar && (
+          <img
+            src={URL.createObjectURL(avatar)}
+            alt="Preview"
+            className="w-24 h-24 rounded-full border-2 border-red-600 object-cover"
           />
-        </div>
+        )}
+
+        <label className="flex items-center space-x-2 mt-2">
+          <input
+            type="checkbox"
+            checked={isKid}
+            onChange={() => setIsKid(!isKid)}
+            className="accent-red-600 w-5 h-5"
+          />
+          <span>Kid?</span>
+        </label>
 
         <button
-          type="submit"
+          onClick={handleSaveProfile}
           disabled={loading}
-          className={`w-full py-3 rounded text-white font-semibold mt-4 transition 
-    ${
-      loading
-        ? "hover:bg-red-800 cursor-not-allowed"
-        : "bg-red-600 hover:bg-red-700"
-    }`}
+          className="bg-red-600 px-6 py-2 rounded mt-4 hover:bg-red-700 transition w-full"
         >
-          {loading ? "Signing in..." : "Sign Up"}
-        </button> */}
-      </form>
-    </div>
+          {loading ? "Saving..." : "Save Profile"}
+        </button>
+      </div>
   );
 };
 
