@@ -60,3 +60,4 @@ class AllUserSerializerView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = AllUserSerializer
     
+    

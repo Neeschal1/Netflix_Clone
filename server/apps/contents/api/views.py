@@ -6,6 +6,6 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 
 class ContentsSerializersView(generics.ListAPIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes=[AllowAny]
     queryset = Contents.objects.all()
     serializer_class = ContentsSerializers
