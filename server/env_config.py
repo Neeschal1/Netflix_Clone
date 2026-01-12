@@ -8,7 +8,7 @@ class Config:
     EMAIL = os.getenv('EMAIL')
     PASSWORD = os.getenv('PASSWORD')
     
-    STRIP_SECRET_KEY = os.getenv('STRIP_SECRET_KEY')
+    STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+    STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
     
     MAILTRAP_API_KEY = os.getenv('MAILTRAP_API_KEY')
-    
