@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from ..models.entities import Userchoice, Profile
+from ..models.entities import Userchoice, Profile, Plan
 from django.contrib.auth.hashers import make_password
 
 # For Creating a user
@@ -40,8 +40,16 @@ class UserOTPSerializers(serializers.Serializer):
     otp = serializers.IntegerField()
     
 # For Creating a plan
-# class UsersPlanSerializer(serializers.ModelSerializer):
-    
+class UsersPlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Plan
+        fields = '__all__'
+        extra_kwargs = {
+            'Users_name' : {'required' : True},
+            'Subscription_type' : {'required' : True},
+            'Time' : {'read_only' : True},
+            'Paid': { 'read_only' : True }
+        }
 
 # For login credentials
 class UserLoginSerializers(serializers.Serializer):
