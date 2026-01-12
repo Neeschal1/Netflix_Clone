@@ -1,7 +1,7 @@
 from django.core.cache import cache
 from rest_framework.exceptions import ValidationError
-from django.contrib.auth.models import User
 from rest_framework.response import Response
+from rest_framework import status
 
 def otpverification(serializer):
     OTP = serializer.validated_data['otp']
@@ -11,10 +11,4 @@ def otpverification(serializer):
         raise ValidationError("OTP did not found, or may have been expired.Please request a new one!")
     if not OTP == o_t_p:
         raise ValidationError("OTP does not match. Try again!")
-    try:
-        user = User.objects.get(email = Email)
-    except User.DoesNotExist:
-        raise ValidationError("User does not found. So sorry :(")
-    user.is_active = True
-    user.save()
-    return user
+    return Response({"Message": "OTP verified successfully"}, status=status.HTTP_201_CREATED)

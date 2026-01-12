@@ -22,6 +22,7 @@ class Profile(models.Model):
 class Plan(models.Model):
     Users_name = models.ForeignKey(User, on_delete=models.CASCADE)
     Subscription_type = models.CharField(max_length=20, choices=USERS_DESIRED_PLAN_CHOICE)
+    Price= models.PositiveIntegerField(default=0)
     Time = models.DateTimeField(auto_now_add=True)
     Paid = models.BooleanField(default=False)
     def __str__(self):

@@ -8,6 +8,7 @@ from ..services.verify_otp import otpverification
 from ..services.user_login import login_an_account
 from ..services.users_choice import users_content_choice
 from ..services.users_profile import users_profile
+from ..services.payment import create_plan_payment
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
@@ -27,8 +28,16 @@ class UserOTPSerializersView(APIView):
     def post(self, request):
         serializer = UserOTPSerializers(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = otpverification(serializer)
-        return Response({"Message": "OTP verified successfully", "Users verification Status" : user.is_active, "id" : user.id})
+        otpverification(serializer)
+    
+# View for creating a subscription plan
+class UsersPlanSerializerView(APIView):
+    parser_classes = [AllowAny]
+    authentication_classes = []
+    permission_classes = []
+    def post(self, request):
+        plantype = request.data.get("item")
+        create_plan_payment(plantype)
     
 # Views for Logging in a user
 class UserLoginSerializersView(APIView):

@@ -47,6 +47,7 @@ class UsersPlanSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'Users_name' : {'required' : True},
             'Subscription_type' : {'required' : True},
+            'Price' : {'required' : True},
             'Time' : {'read_only' : True},
             'Paid': { 'read_only' : True }
         }
