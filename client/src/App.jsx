@@ -15,6 +15,7 @@ import Home from "./screens/home";
 import Contentchoices from "./screens/content_choice";
 import Profile from "./screens/profile";
 import Plans from "./screens/plans";
+import Subscribed from "./screens/subscribedplan";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/signup" element={<Signup language={language} />} />
         <Route path="/signup/otp" element={<OTP language={language} />} />
         <Route path="/signup/otp/plans" element={<Plans language={language} />} />
+        <Route path="/signup/otp/plans/subscription" element={<Subscribed language={language} />} />
         <Route path="/signup/otp/plans/choices/" element={<Contentchoices language={language} />} />
         <Route path="/signup/otp/plans/choices/profile/" element={<Profile language={language} />} />
         <Route path="/about" element={<Aboutus language={language} />} />
