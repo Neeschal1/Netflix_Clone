@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .choices import USER_DESIRED_CONTENT_CHOICES
+from .choices import USER_DESIRED_CONTENT_CHOICES, USERS_DESIRED_PLAN_CHOICE
 
 class Userchoice(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,7 +21,7 @@ class Profile(models.Model):
     
 class Plan(models.Model):
     Users_name = models.ForeignKey(User, on_delete=models.CASCADE)
-    Subscription_type = models.CharField(max_length=20)
+    Subscription_type = models.CharField(max_length=20, choices=USERS_DESIRED_PLAN_CHOICE)
     Time = models.DateTimeField(auto_now_add=True)
     Paid = models.BooleanField(default=False)
     def __str__(self):

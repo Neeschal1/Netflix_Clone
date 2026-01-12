@@ -19,7 +19,7 @@ class UserSerializers(serializers.ModelSerializer):
         }
 
 
-# For Admins only(Seeing all user's info)
+# For Admins only (Seeing all user's info)
 class AllUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -34,15 +34,21 @@ class AllUserSerializer(serializers.ModelSerializer):
             'is_active' : {'read_only' : True},
         }   
 
+# For OTP Verification
 class UserOTPSerializers(serializers.Serializer):
     email = serializers.EmailField()
     otp = serializers.IntegerField()
+    
+# For Creating a plan
+# class UsersPlanSerializer(serializers.ModelSerializer):
+    
 
-
+# For login credentials
 class UserLoginSerializers(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
-    
+
+# For creating a content choice
 class UserChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Userchoice
@@ -51,7 +57,8 @@ class UserChoiceSerializer(serializers.ModelSerializer):
             'User' : {'write_only' : True},
             'Users_choice' : {'required' : True},
         }
-        
+
+# For creating a Profile of Viewer       
 class UsersProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
