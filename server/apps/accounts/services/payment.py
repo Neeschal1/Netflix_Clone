@@ -19,32 +19,42 @@ def verifyuser(user):
     return user
 
 # Stripe Payment Logic
+
+# item: {
+#       Users_name: user_name,  // ✅ Fixed field name
+#       type: choosedPlan,
+#       description: describe,
+#       price: cost,
+#     },
 def create_plan_payment(plantype):
-    lineitems = [
-        {
-            "price_data": {
-                "currency": "usd",
-                "unit_amount": int(plantype["price"] * 100),
-                "product_data": {
-                    "name": plantype["name"],
-                    "description": [plantype["type"], plantype["description"]],
+    try:
+        lineitems = [
+            {
+                "price_data": {
+                    "currency": "usd",
+                    "unit_amount": int(plantype["price"] * 100),
+                    "product_data": {
+                        "name": f"{plantype['type']} Plan",
+                        "description": f"{plantype['description']}" 
+                    },
                 },
+                "quantity": 1,
             },
-            "quantity": 1,
-        },
-    ]
-    session = stripe.checkout.Session.create(
-        ui_mode="custom",
-        line_items=lineitems,
-        mode="payment",
-        success_url="https://i.pinimg.com/736x/e6/df/e5/e6dfe5d171630e764b73a0c1192d1265.jpg",
-        cancel_url="https://i.pinimg.com/1200x/76/e0/86/76e086304ed8b5411cc1c64d47da9c1d.jpg",
-    )
-    user = verifyuser(plantype['Users_name'])
-    Plan.objects.create(
-        Users_name = user.username,
-        Subscription_type = plantype['type'],
-        Price = plantype['price'],
-        Paid = True
-    )
-    return Response({'url':session.url})
+        ]
+        session = stripe.checkout.Session.create(
+            # ui_mode="custom",
+            line_items=lineitems,
+            mode="payment",
+            success_url="https://i.pinimg.com/736x/e6/df/e5/e6dfe5d171630e764b73a0c1192d1265.jpg",
+            cancel_url="https://i.pinimg.com/1200x/76/e0/86/76e086304ed8b5411cc1c64d47da9c1d.jpg",
+        )
+        user = verifyuser(plantype['Users_name'])
+        Plan.objects.create(
+            Users_name = user,
+            Subscription_type = plantype['type'],
+            Price = plantype['price'],
+            Paid = True
+        )
+        return Response({'url':session.url})
+    except Exception as e:
+        return Response(e)

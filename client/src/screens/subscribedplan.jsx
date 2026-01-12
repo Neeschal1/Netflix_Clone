@@ -2,10 +2,15 @@ import React from "react";
 import banner from "../assets/banner.png";
 import Header from "../constants/header";
 import { useLocation } from "react-router-dom";
+import Handlesubscription from "../api/accounts/handlesubscription";
 
 const Subscribed = ({ language }) => {
   const location = useLocation();
   const { choosedPlan, describe, cost, color } = location.state || {};
+
+  const handleSubscription = () => {
+    Handlesubscription(choosedPlan, describe, cost)
+  }
 
   return (
     <div
@@ -25,7 +30,7 @@ const Subscribed = ({ language }) => {
         <h1 className="text-4xl font-bold">{choosedPlan}</h1>
         <p className="text-gray-300">{describe}</p>
         <h2 className="text-2xl font-semibold mt-4">${cost} / month</h2>
-        <button style={{backgroundColor: color}}>Buy</button>
+        <button onClick={(handleSubscription)} style={{backgroundColor: color}}>Buy</button>
       </div>
     </div>
   );

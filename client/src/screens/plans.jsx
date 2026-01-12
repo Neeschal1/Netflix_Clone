@@ -27,14 +27,10 @@ const plans = [
   },
 ];
 
-
-
-
 const Plans = ({ language }) => {
   const navigate = useNavigate();
 
   const handleButton = (plan) => {
-    // navigate to subscription page and pass plan details as state
     navigate("/signup/otp/plans/subscription", { 
       state: { 
         choosedPlan: plan.Plantype, 

@@ -12,6 +12,8 @@ from ..services.payment import create_plan_payment
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from rest_framework import status
 
 # Views for Creating an account of a user
@@ -31,13 +33,13 @@ class UserOTPSerializersView(APIView):
         otpverification(serializer)
     
 # View for creating a subscription plan
+@method_decorator(csrf_exempt, name="dispatch")
 class UsersPlanSerializerView(APIView):
-    parser_classes = [AllowAny]
     authentication_classes = []
     permission_classes = []
     def post(self, request):
         plantype = request.data.get("item")
-        create_plan_payment(plantype)
+        return create_plan_payment(plantype)
     
 # Views for Logging in a user
 class UserLoginSerializersView(APIView):

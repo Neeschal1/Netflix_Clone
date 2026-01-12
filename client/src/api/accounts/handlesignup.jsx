@@ -33,6 +33,9 @@ const handlesignup = async (e,
         email : Email
       }
     });
+
+    localStorage.setItem("username", Username)
+
   } catch (err) {
     console.log("Django Error: ", err);
   } finally {
