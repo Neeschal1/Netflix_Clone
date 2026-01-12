@@ -17,7 +17,7 @@ const otpverification = async (e, users_email, otp, navigate, setLoading) => {
     });
     const usersid = response.data.id
     console.log("User's id: ", usersid) 
-    navigate('/signup/otp/choices/', {
+    navigate('/signup/otp/plans', {
       state : {
         id : usersid,
       }

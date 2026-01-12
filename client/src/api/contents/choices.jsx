@@ -10,14 +10,13 @@ const Choices = async (e, userid, val, setLoading, navigate) => {
   };
   setLoading(true)
   try {
-    const response = await axios.post(`${url}/accounts/signup/choices/`, user_choice, {
+    const response = await axios.post(`${url}accounts/signup/otp/plan/choices`, user_choice, {
       headers: {
         "Content-Type" : "application/json"
       },
     });
     console.log(response)
-    // return response.data;
-    navigate('/signup/otp/choices/profile/', {
+    navigate('/signup/otp/plans/subscription/choices/', {
         state: {
             user_id: userid
         }

@@ -11,7 +11,7 @@ urlpatterns = [
     path('signup/otp/', views.UserOTPSerializersView.as_view(), name='UserOTPSerializersView'),
     path('signup/otp/plan/', views.UsersPlanSerializerView.as_view(), name='UsersPlanSerializerView'),
     path('signup/otp/plan/choices/', views.UserChoiceSerializerView.as_view(), name='UserChoiceSerializerView'),
-    path('signup/otp/plan/choices/profile/', views.UsersProfileSerializerView.as_view(), name='UsersProfileSerializerView'),
+    path('signup/otp/choices/profile/', views.UsersProfileSerializerView.as_view(), name='UsersProfileSerializerView'),
     path('login/', views.UserLoginSerializersView.as_view(), name='UserLoginSerializersView'),
     path('signup/allusers/', views.AllUserSerializerView.as_view(), name='AllUserSerializerView'),
 ]

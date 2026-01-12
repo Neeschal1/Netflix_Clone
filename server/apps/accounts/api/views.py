@@ -30,7 +30,7 @@ class UserOTPSerializersView(APIView):
     def post(self, request):
         serializer = UserOTPSerializers(data=request.data)
         serializer.is_valid(raise_exception=True)
-        otpverification(serializer)
+        return otpverification(serializer)
     
 # View for creating a subscription plan
 @method_decorator(csrf_exempt, name="dispatch")

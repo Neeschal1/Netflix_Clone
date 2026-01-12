@@ -11,7 +11,7 @@ const PaymentSuccess = ({language}) => {
   }, []);
 
   const handleContinue = () => {
-    navigate('/signup/otp/plans/subscription/choices/')
+    navigate('/login')
   };
 
   const handleGoHome = () => {

@@ -31,8 +31,8 @@ export default function App() {
         <Route path="/signup/otp" element={<OTP language={language} />} />
         <Route path="/signup/otp/plans" element={<Plans language={language} />} />
         <Route path="/signup/otp/plans/subscription" element={<Subscribed language={language} />} />
-        <Route path="/signup/otp/plans/success" element={<PaymentSuccess language={language} />} />
-        <Route path="/signup/otp/plans/failure" element={<PaymentFailure language={language} />} />
+        <Route path="/signup/otp/plans/subscription/success" element={<PaymentSuccess language={language} />} />
+        <Route path="/signup/otp/plans/subscription/failure" element={<PaymentFailure language={language} />} />
         <Route path="/signup/otp/plans/subscription/choices/" element={<Contentchoices language={language} />} />
         <Route path="/signup/otp/plans/subscription/choices/profile/" element={<Profile language={language} />} />
         <Route path="/about" element={<Aboutus language={language} />} />

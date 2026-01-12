@@ -6,7 +6,7 @@ class Userchoice(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     Users_choice = models.CharField(max_length=15, choices=USER_DESIRED_CONTENT_CHOICES)
     def __str__(self):
-        return self.User.first_name
+        return self.User.username
     
 class Profile(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,4 +26,4 @@ class Plan(models.Model):
     Time = models.DateTimeField(auto_now_add=True)
     Paid = models.BooleanField(default=False)
     def __str__(self):
-        return self.Users_name
+        return self.Users_name.username
