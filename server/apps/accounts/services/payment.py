@@ -19,13 +19,6 @@ def verifyuser(user):
     return user
 
 # Stripe Payment Logic
-
-# item: {
-#       Users_name: user_name,  // ✅ Fixed field name
-#       type: choosedPlan,
-#       description: describe,
-#       price: cost,
-#     },
 def create_plan_payment(plantype):
     try:
         lineitems = [
