@@ -26,15 +26,15 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path="/welcome" element={<Welcome language={language} setLanguage={setLanguage} />}/>
-        <Route path="/login" element={<Login language={language} />} />
         <Route path="/signup" element={<Signup language={language} />} />
-        <Route path="/signup/otp" element={<OTP language={language} />} />
-        <Route path="/signup/otp/plans" element={<Plans language={language} />} />
-        <Route path="/signup/otp/plans/subscription" element={<Subscribed language={language} />} />
-        <Route path="/signup/otp/plans/subscription/success" element={<PaymentSuccess language={language} />} />
-        <Route path="/signup/otp/plans/subscription/failure" element={<PaymentFailure language={language} />} />
-        <Route path="/signup/otp/plans/subscription/choices/" element={<Contentchoices language={language} />} />
-        <Route path="/signup/otp/plans/subscription/choices/profile/" element={<Profile language={language} />} />
+        <Route path="/otp" element={<OTP language={language} />} />
+        <Route path="/plans" element={<Plans language={language} />} />
+        <Route path="/subscription" element={<Subscribed language={language} />} />
+        <Route path="/success" element={<PaymentSuccess language={language} />} />
+        <Route path="/failure" element={<PaymentFailure language={language} />} />
+        <Route path="/choices/" element={<Contentchoices language={language} />} />
+        <Route path="/profile/" element={<Profile language={language} />} />
+        <Route path="/login/" element={<Login language={language} />} />
         <Route path="/about" element={<Aboutus language={language} />} />
         <Route path="/login/home" element={<Home language={language} />} />
       </Routes>

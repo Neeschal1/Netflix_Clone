@@ -38,8 +38,8 @@ def create_plan_payment(plantype):
             # ui_mode="custom",
             line_items=lineitems,
             mode="payment",
-            success_url="http://localhost:5173/signup/otp/plans/subscription/success",
-            cancel_url="http://localhost:5173/signup/otp/plans/subscription/failure",
+            success_url="http://localhost:5173/success",
+            cancel_url="http://localhost:5173/failure",
         )
         user = verifyuser(plantype['Users_name'])
         Plan.objects.create(

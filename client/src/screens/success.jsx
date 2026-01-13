@@ -11,11 +11,7 @@ const PaymentSuccess = ({language}) => {
   }, []);
 
   const handleContinue = () => {
-    navigate('/login')
-  };
-
-  const handleGoHome = () => {
-    window.location.href = "/";
+    navigate('/choices/')
   };
 
   return (

@@ -11,16 +11,17 @@ const Create_Profile = async (
   navigate
 ) => {
   e.preventDefault();
+  const user_id = localStorage.getItem("id");
   const user_profile = {
     Name: name,
     Avatar: avatarUrl,
     Is_kid: isKid,
-    User: id,
+    User: user_id,
   };
   setLoading(true)
   try {
     const res = await axios.post(
-      `${url}/accounts/signup/choices/profile/`,
+      `${url}accounts/signup/otp/plan/choices/profile/`,
       user_profile,
       {
         headers: {
@@ -29,7 +30,7 @@ const Create_Profile = async (
       }
     );
     console.log(res.data.data)
-    navigate('/login/')
+    navigate('/login')
   } catch (err) {
     console.log(err)
   } finally {

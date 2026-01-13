@@ -17,6 +17,9 @@ def login_an_account(serializer):
         )
     if not check_password(Password, user.password):
         raise ValidationError("Invalid Credentials!")
+    
+    if not user.is_active == True:
+        raise ValidationError("You are not verified yet. So Sorry :(")
     # JWT tokens generations
     refresh = RefreshToken.for_user(user)
     access_token = str(refresh.access_token)

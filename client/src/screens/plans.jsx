@@ -31,7 +31,7 @@ const Plans = ({ language }) => {
   const navigate = useNavigate();
 
   const handleButton = (plan) => {
-    navigate("/signup/otp/plans/subscription", { 
+    navigate("/subscription", { 
       state: { 
         choosedPlan: plan.Plantype, 
         describe: plan.Description, 

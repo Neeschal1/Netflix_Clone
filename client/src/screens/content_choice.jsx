@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const Contentchoices = ({ language }) => {
   const navigate = useNavigate();
-  const [val, setVal] = useState("mov");
+  const [val, setVal] = useState("MOVIES");
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 

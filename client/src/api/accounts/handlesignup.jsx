@@ -28,13 +28,16 @@ const handlesignup = async (e,
       },
     });
     console.log("Signup Success: ", url.data);
-    navigate("/signup/otp", {
+    navigate("/otp", {
       state : {
         email : Email
       }
     });
 
+    const ID = url.data.data.id
+
     localStorage.setItem("username", Username)
+    localStorage.setItem("id", ID)
 
   } catch (err) {
     console.log("Django Error: ", err);
